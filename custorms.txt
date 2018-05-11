@@ -1,0 +1,6 @@
+Manson-1 trade_user_name_manson
+test1-zyobot trade_user_name_bot
+test2 trade_user_name2
+test3 trade_user_name3
+test4 trade_user_name4
+test5-ouyang trade_user_name_ouyang
