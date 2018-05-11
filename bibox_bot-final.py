@@ -21,9 +21,10 @@ import wxpy
 bibox_key='f76379cb00896cf749ed03e37012ddaa0c37eb21'
 bibox_secret='6618411ab5365792aa8021dcba3c2e663d0a14b9'
 tuling = wxpy.Tuling(api_key='01e5cef894554387bd15ab6126c36900')
+bot=wxpy.Bot(console_qr=True)
 def login():
     global bot
-    bot=wxpy.Bot()
+    bot=wxpy.Bot(console_qr=True)
 
 def get_assets():
     cmds = '[{"cmd":"transfer/assets","body":{"select":""}}]'
@@ -72,12 +73,11 @@ def get_volume():
     amount_eth=df_eth[df_eth.createdAt/1000>time.time()-24*60*60].amount.astype('float').sum()
     ret='In the last 24 hours, we traded '+str(amount_btc)+' CAT on CAT/BTC pair and '+str(amount_eth)+' CAT on CAT/ETH pair.'
     return ret
-def main():
-#    boss=bot.friends().search('王泽宪')[0]
-    group=bot.groups().search('BOT')[0]
-    @bot.register([group])
-    def auto_reply(msg):
-        print(msg)
+
+group=bot.groups().search('BOT')[0]
+@bot.register([group])
+def auto_reply(msg):
+    print(msg)
 #        print(msg.member.name)
 #        if msg.member.name=='王泽宪':
 #            group.send('hi!'+msg.member.name)
@@ -85,19 +85,18 @@ def main():
 #            group.send('hi!'+msg.member.name)
 #        if msg.member.name=='Bigbao':
 #            group.send('hi!'+msg.member.name)         
-        
-        if msg.text=='balance':
-            balance=get_balance()
-            return balance
-        else:
-            if msg.text=='change':
-                return get_change()
-            else:
-                if msg.text=='volume':
-                    return get_volume()
-                else:
-                    tuling.do_reply(msg)
 
-    
-    
-    
+    if msg.text=='balance':
+        balance=get_balance()
+        return balance
+    else:
+        if msg.text=='change':
+            return get_change()
+        else:
+            if msg.text=='volume':
+                return get_volume()
+            else:
+                tuling.do_reply(msg)
+
+
+wxpy.embed()
